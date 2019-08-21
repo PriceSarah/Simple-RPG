@@ -8,11 +8,11 @@ namespace Simple__RPG
 {
     class Game
     {
+        //player info
+        string playerName = "";
+        int playerHealth = 100;
         public void Start()
         {
-            //player info
-            string playerName = "";
-            int playerHealth = 100;
             
 
             //Welcome
@@ -21,6 +21,21 @@ namespace Simple__RPG
             Console.WriteLine("Welcome, " + playerName);
 
             Console.WriteLine("");
+
+            encounter();
+            
+
+            Console.ReadKey();
+        }
+
+        void welcome()
+        {
+
+        }
+        void encounter()
+        {
+            
+
 
             //Monster Encounter!
             int monsterDamage = 13;
@@ -36,7 +51,7 @@ namespace Simple__RPG
                 //monster attack
                 Console.WriteLine("The monster attacks! " + playerName + " takes " + monsterDamage + " damage!");
                 playerHealth = playerHealth - monsterDamage;
-                Console.WriteLine(playerName + " has " + playerHealth +" health left!");
+                Console.WriteLine(playerName + " has " + playerHealth + " health left!");
 
                 //player attack
                 Console.WriteLine(playerName + " attacks! the monster is defeated!");
@@ -49,8 +64,6 @@ namespace Simple__RPG
 
             }
 
-
-            Console.ReadKey();
         }
     }
 }
