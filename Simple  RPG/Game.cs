@@ -14,6 +14,8 @@ namespace Simple__RPG
         int playerHealth = 100;
         int playerDamage = 10;
         int monstersRemaining = 5;
+        int playerHeal = 50;
+        
         public void Start()
         {
             //the whole game basically
@@ -58,7 +60,7 @@ namespace Simple__RPG
             while (playerHealth > 0 && monsterHealth > 0)
             {
 
-                Console.Write("What do you want to do? (fight/flee) ");
+                Console.Write("What do you want to do? (fight/flee/heal) ");
                 action = Console.ReadLine();
                 Console.WriteLine("");
 
@@ -77,11 +79,19 @@ namespace Simple__RPG
 
                 else if (action == "flee" || action == "Flee")
                 {
-                    //escape
-                    Console.WriteLine(playerName + " got out safley");
-                    Console.WriteLine("");
-                    return true;
-
+                    survived = flee();
+                    if (survived)
+                    {
+                        return true;
+                    }
+                }
+                else if (action == "heal" || action == "Heal")
+                {
+                    survived = heal(ref monsterDamage, ref monsterHealth);
+                    if (!survived)
+                    {
+                        return false;
+                    }
                 }
             }
 
@@ -91,7 +101,7 @@ namespace Simple__RPG
 
         bool fight(ref int monsterDamage, ref int monsterHealth)
         {
-            
+
             //monster attack
             Console.WriteLine("The monster attacks! " + playerName + " takes " + monsterDamage + " damage!");
             playerHealth = playerHealth - monsterDamage;
@@ -111,19 +121,47 @@ namespace Simple__RPG
             if (monsterHealth <= 0)
             {
                 Console.WriteLine("The monster was defeated!");
-                
-                return true;
-            }
-            bool flee()
-            {
 
-                return true;
-            }
-            bool heal()
-            {
                 return true;
             }
             return true;
         }
+
+            bool flee()
+            {
+                //escape
+                Console.WriteLine(playerName + " got out safley");
+                Console.WriteLine("");
+                
+                return true;
+            }
+
+            bool heal(ref int monsterDamage, ref int monsterHealth)
+            { 
+            //monster attack
+            Console.WriteLine("The monster attacks! " + playerName + " takes " + monsterDamage + " damage!");
+            playerHealth = playerHealth - monsterDamage;
+            Console.WriteLine("");
+            Console.WriteLine(playerName + " has " + playerHealth + " health left!");
+            if (playerHealth <= 0)
+            {
+                //player defeat
+                Console.WriteLine(playerName + " was defeated!");
+                return false;
+            }
+
+            //player heal
+            Console.WriteLine(playerName + " casts Healing Light and recovers " + playerHeal + " health");
+            playerHealth += playerHeal;
+            if (playerHealth > playerMaxHealth)
+            {
+                playerHealth = playerMaxHealth;
+            }
+            Console.WriteLine("You now have " + playerHealth + " health");
+            return true;
+            
+            }
+           
+        
     }
 }
