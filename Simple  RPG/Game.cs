@@ -16,13 +16,19 @@ namespace Simple__RPG
             //the whole game basically
             welcome();
 
+
+            int monstersRemaining = 5;
+
+
             //all the encounters
             bool alive = true;
 
-            while (alive)
+            while (alive && monstersRemaining>0)
             {
+                Console.WriteLine("There are " + monstersRemaining + " Monsters left");
                 Console.WriteLine("");
-                alive = encounter(10);
+                alive = encounter(20);
+                monstersRemaining--;
             }
             Console.ReadKey();
         }
@@ -46,11 +52,13 @@ namespace Simple__RPG
             string action = "";
             Console.Write("Well " + playerName + " Do Something! (fight/flee) ");
             action = Console.ReadLine();
+            Console.WriteLine("");
             if (action == "fight" || action == "Fight")
             {
                 //monster attack
                 Console.WriteLine("The monster attacks! " + playerName + " takes " + monsterDamage + " damage!");
                 playerHealth = playerHealth - monsterDamage;
+                Console.WriteLine("");
                 Console.WriteLine(playerName + " has " + playerHealth + " health left!");
                 if (playerHealth <= 0)
                 {
