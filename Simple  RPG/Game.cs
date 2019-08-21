@@ -13,32 +13,32 @@ namespace Simple__RPG
         int playerHealth = 100;
         public void Start()
         {
-            
+            //the whole game basically
+            welcome();
 
-            //Welcome
-            Console.WriteLine("What is your name? ");
-            playerName = Console.ReadLine();
-            Console.WriteLine("Welcome, " + playerName);
+            //all the encounters
+            bool alive = true;
 
-            Console.WriteLine("");
-
-            encounter();
-            
-
+            while (alive)
+            {
+                Console.WriteLine("");
+                alive = encounter(10);
+            }
             Console.ReadKey();
         }
 
         void welcome()
         {
+            //Welcome
+            Console.WriteLine("What is your name? ");
+            playerName = Console.ReadLine();
+            Console.WriteLine("Welcome, " + playerName);
 
         }
-        void encounter()
+        bool encounter(int monsterDamage)
         {
-            
-
-
             //Monster Encounter!
-            int monsterDamage = 13;
+            
             Console.WriteLine("There is a monster in front of you!");
 
             Console.WriteLine("");
@@ -52,6 +52,12 @@ namespace Simple__RPG
                 Console.WriteLine("The monster attacks! " + playerName + " takes " + monsterDamage + " damage!");
                 playerHealth = playerHealth - monsterDamage;
                 Console.WriteLine(playerName + " has " + playerHealth + " health left!");
+                if (playerHealth <= 0)
+                {
+                    //player defeat
+                    Console.WriteLine(playerName + " was defeated!");
+                    return false;
+                }
 
                 //player attack
                 Console.WriteLine(playerName + " attacks! the monster is defeated!");
@@ -63,6 +69,15 @@ namespace Simple__RPG
                 Console.WriteLine(playerName + " got out safley");
 
             }
+
+            //Work in progress
+            /*else if (action != "Fight" || action != "fight" || action != "flee" || action != "Flee")
+            {
+                Console.WriteLine("Try again, (fight/flee)");
+                action = Console.ReadLine();
+
+            }*/
+            return true;
 
         }
     }
